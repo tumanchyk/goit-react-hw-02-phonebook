@@ -6,7 +6,7 @@ import * as yup from 'yup';
 
 const schema = yup.object().shape({
     name: yup.string().min(2).max(20).required(),
-    number: yup.number().min(3).required(),
+    number: yup.number().required(),
 })
 
 const initialValues = {
