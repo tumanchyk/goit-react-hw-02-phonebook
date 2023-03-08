@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Component } from "react";
 import { FormEl, Label, Input, Button } from "./Form.styled";
 export default class ContactForm extends Component{
@@ -49,6 +50,10 @@ export default class ContactForm extends Component{
             </FormEl>
         )
       }
-
-
+}
+FormEl.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+}
+Input.propTypes = {
+    onChange: PropTypes.func.isRequired,
 }

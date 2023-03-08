@@ -1,7 +1,5 @@
 import styled from "@emotion/styled";
 
-const List = styled.ul`
-`
 const ContactItem = styled.li`
 list-style: square;
 padding: 10px;
@@ -12,7 +10,9 @@ border-radius: 5px;
 padding: 4px 10px;
 border: 1px solid lightgrey;
 cursor: pointer;
-font-weight: 500;
 margin-left: 10px;
+&:hover{
+    background-color: #fff;
+}
 `
-export{List, ContactItem, ButtonDelete}
+export{ContactItem, ButtonDelete}

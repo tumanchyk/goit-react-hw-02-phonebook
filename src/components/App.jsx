@@ -7,16 +7,17 @@ import { nanoid } from 'nanoid'
 
  class App extends Component {
   state = {
-    contacts: [
-      {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-      {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-      {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    ],
+    contacts: [],
     filter: '',
   };
 
   onFormSubmit({name, number}){
-    const contact= {
+    const someName = this.state.contacts.filter(contact=> contact.name.toLowerCase() === name.toLowerCase())
+    if(someName.length === 1){
+     alert(`${name} is already in contacts.`)
+     return;
+    }
+        const contact= {
       id: nanoid(7),
       name,
       number
@@ -24,18 +25,17 @@ import { nanoid } from 'nanoid'
   this.setState(({contacts}) => ({
     contacts: [contact, ...contacts],
   }))
+
   }
 
   onDeleteContact(contactId){
     this.setState(({contacts})=> ({
     contacts: contacts.filter(({id}) => id !== contactId)
   })
-    )
-console.log(this.state);
-  }
+    ) }
 
-  handleFilter(message){
-    this.setState({filter: message})}
+  handleFilter(e){
+    this.setState({filter: e.target.value})}
 
   findContact(){
     const {contacts, filter} = this.state;
@@ -51,9 +51,10 @@ console.log(this.state);
   <ContactForm onSubmit={this.onFormSubmit.bind(this)}/>
 
   <Title2>Contacts</Title2>
-  <Filter onChange={this.handleFilter.bind(this)}/> 
+  <Filter value={ this.state.filter } onChange={this.handleFilter.bind(this)}/> 
   <ContactList contacts={foundContacts} handleDelete={this.onDeleteContact.bind(this)}/>
     </>
   )}
 };
 export { App };
+

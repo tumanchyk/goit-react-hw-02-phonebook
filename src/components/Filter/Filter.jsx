@@ -1,20 +1,14 @@
-import { Component } from "react"
+import PropTypes from 'prop-types';
 import { Label, Input } from "./Filter.styled";
-export default class Filter extends Component{
-    state={
-        message: ''
-    }
-    handleFilter= e =>{
-        this.setState({ message: e.currentTarget.value})
-        this.props.onChange(this.state.message)
-    }
-
-    render(){
+export default function Filter({onChange, value}){
     return (
         <Label>
             Find contacts by name
-            <Input type="text" onChange={this.handleFilter}/>
+            <Input type="text" onChange={onChange} value={value} />
         </Label>
     )
     }
+Filter.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired,
 }
