@@ -3,10 +3,15 @@ import styled from "@emotion/styled";
 const Label = styled.label`
 display: flex;
 flex-direction: column;
-margin-left: 20px;
-width: 300px;
+align-items: center;
+margin: 0 auto;
+color: #eee;
 `
 const Input = styled.input`
-padding: 5px;
+padding: 10px;
+outline: none;
+border: none;
+width: 300px;
+border-radius: 50px;
 margin-top: 15px;`
 export {Label, Input}

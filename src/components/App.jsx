@@ -1,10 +1,11 @@
 import { Component } from "react"
-import {Title1, Title2} from './Title/Titles.styled.jsx'
+import { Container } from "./Styles/Container.styled.jsx";
+import {Title1, Title2} from './Styles/Titles.styled.jsx'
 import ContactForm from "./Form/ContactForm";
 import ContactList from "./ContactsList/ContactsList.jsx";
 import Filter from "./Filter/Filter.jsx";
 import { nanoid } from 'nanoid'
-
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
  class App extends Component {
   state = {
     contacts: [],
@@ -14,7 +15,7 @@ import { nanoid } from 'nanoid'
   onFormSubmit({name, number}){
     const someName = this.state.contacts.filter(contact=> contact.name.toLowerCase() === name.toLowerCase())
     if(someName.length === 1){
-     alert(`${name} is already in contacts.`)
+      Notify.failure(`${name} is already in contacts.`);
      return;
     }
         const contact= {
@@ -42,18 +43,17 @@ import { nanoid } from 'nanoid'
     return contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
   }
 
-
   render(){
     const foundContacts = this.findContact();
   return (
-    <>
+    <Container>
   <Title1>Phonebook</Title1>
   <ContactForm onSubmit={this.onFormSubmit.bind(this)}/>
 
   <Title2>Contacts</Title2>
   <Filter value={ this.state.filter } onChange={this.handleFilter.bind(this)}/> 
   <ContactList contacts={foundContacts} handleDelete={this.onDeleteContact.bind(this)}/>
-    </>
+    </Container>
   )}
 };
 export { App };
