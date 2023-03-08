@@ -1,10 +1,9 @@
 import { Component } from "react"
 import { Container } from "./Styles/Container.styled.jsx";
 import {Title1, Title2} from './Styles/Titles.styled.jsx'
-import ContactForm from "./Form/ContactForm";
+import { ContactForm } from "./Form/ContactForm";
 import ContactList from "./ContactsList/ContactsList.jsx";
 import Filter from "./Filter/Filter.jsx";
-import { nanoid } from 'nanoid'
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
  class App extends Component {
   state = {
@@ -12,17 +11,13 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
     filter: '',
   };
 
-  onFormSubmit({name, number}){
-    const someName = this.state.contacts.filter(contact=> contact.name.toLowerCase() === name.toLowerCase())
+  onFormSubmit(contact){
+    const someName = this.state.contacts.filter(item=> contact.name.toLowerCase() === item.name.toLowerCase())
     if(someName.length === 1){
-      Notify.failure(`${name} is already in contacts.`);
+      Notify.failure(`${contact.name} is already in contacts.`);
      return;
     }
-        const contact= {
-      id: nanoid(7),
-      name,
-      number
-    };
+    
   this.setState(({contacts}) => ({
     contacts: [contact, ...contacts],
   }))
